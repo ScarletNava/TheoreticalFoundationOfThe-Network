@@ -34,20 +34,20 @@ class Exponential:
     def __init__(self,lam) -> None:
         self.lam=lam
 
+    def random(self):       
+        return np.ceil(np.random.exponential(self.lam))
 
-    def random(self):
-        
-        return np.rint(np.random.exponential(self.lam))
+
 
 if __name__ == "__main__":
-    # p=PoissonProcess(1,100)
-    # print(p.random())
+    p=PoissonProcess(1,100)
+    print(p.random())
 
     e=Exponential(40)
     s=[]
     for i in range(10000):  
         s.append(e.random())  
-    print(s)
+    # print(s)
     print(mean(s))
     plt.hist(s, bins=80, alpha=0.7) #绘制直方图
     plt.margins(0.02) 
