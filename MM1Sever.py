@@ -6,7 +6,7 @@ import numpy as np
 class Sever:
 
 
-    def __init__(self,lam,mu,endTime) -> None:
+    def __init__(self,lam,mu,endTime,connection,arriveTimeList) -> None:
         self.lam = lam
         self.mu = mu
         self.endTime = endTime
@@ -18,9 +18,13 @@ class Sever:
 
         self.cacheLength = []
 
-        # 获取顾客到达时间
-        arriveTimeList=MyRandom.PoissonProcess(self.lam,self.endTime).random()
-        # print(arriveTimeList)
+        self.finishServicingTime = []
+
+        if(not connection):
+            # 获取顾客到达时间
+            arriveTimeList=MyRandom.PoissonProcess(self.lam,self.endTime).random()
+            # print(arriveTimeList)
+        
 
         # 获取顾客数量
         self.customerNum = arriveTimeList.size
@@ -70,6 +74,8 @@ class Sever:
                     
                     # print("服务完成")
 
+                    self.finishServicingTime.append(currentTime)
+
                     self.idle = True
                     self.servicing = None
 
@@ -87,11 +93,11 @@ class Sever:
         for customer in self.customerList:
             waitingTimeList.append(customer.waitingTime)
 
-        print("平均队长:",np.mean(self.cacheLength),"平均等待时间:",np.mean(waitingTimeList))
+        
         
 
         return np.mean(self.cacheLength),np.mean(waitingTimeList)
-        
+
 
   
 
