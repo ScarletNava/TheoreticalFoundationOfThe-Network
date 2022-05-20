@@ -8,8 +8,8 @@ import numpy as np
 
 def mm1():
     # 在这改参数
-    lam = 0.09 # λ
-    mu = 0.1 # μ
+    lam = 1/15 # λ
+    mu = 1/12 # μ
     rou = lam/mu
     E_N = rou/(1-rou)
     T = 1/(mu-lam)
@@ -22,7 +22,7 @@ def mm1():
 
 
     # 多次实验取平均
-    for i in range(50):
+    for i in range(200):
 
         sever = MM1Sever.Sever(lam,1/mu,5000,False,[])
 
@@ -56,7 +56,7 @@ def _2_mm1():
 
 
     # 多次实验取平均
-    for i in range(50):
+    for i in range(200):
 
         # mm1
         sever = MM1Sever.Sever(lam,1/mu_1,5000,False,[])
@@ -85,5 +85,5 @@ def _2_mm1():
     print("平均等待时间：% .3f"%np.mean(waitingTimeList))
 
 
-# mm1()
-_2_mm1()
+mm1()
+# _2_mm1()
